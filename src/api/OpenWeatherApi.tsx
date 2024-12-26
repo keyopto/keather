@@ -13,6 +13,7 @@ export const getCurrentWeatherForLocation = (
     params: {
       ...params,
       appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+      lang: "fr",
     },
   });
 };
