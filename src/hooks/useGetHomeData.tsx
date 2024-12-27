@@ -32,7 +32,10 @@ const useGetHomeData = (): GetHomeDataReturn => {
   }, [locationInfo]);
 
   const addLocation = (city: string) => {
-    console.log(city);
+    if (!!otherCities.find((otherCity) => otherCity === city)) {
+      return;
+    }
+
     setOtherCities((prev) => {
       return [...prev, city];
     });
