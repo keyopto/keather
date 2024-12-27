@@ -17,3 +17,13 @@ export const getCurrentWeatherForLocation = (
     },
   });
 };
+
+export const getCurrentWeatherForCity = (city: string) => {
+  return axiosInstance.get("/weather", {
+    params: {
+      q: city,
+      appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+      lang: "fr",
+    },
+  });
+};

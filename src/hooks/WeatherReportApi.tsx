@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { openWeatherKeys } from "../types/apiKeys";
-import { getCurrentWeatherForLocation } from "../api/OpenWeatherApi";
+import {
+  getCurrentWeatherForCity,
+  getCurrentWeatherForLocation,
+} from "../api/OpenWeatherApi";
 import Location from "../types/Location";
 import GetWeatherForLocationResponse from "../types/GetWeatherForLocationResponse";
 
 export const useGetCurrentWeatherForLocation = (location: Location) => {
   return useQuery({
-    queryKey: openWeatherKeys.item(location),
+    queryKey: openWeatherKeys.itemLocation(location),
     queryFn: async (): Promise<GetWeatherForLocationResponse> => {
       const response = await getCurrentWeatherForLocation({
         lat: location.latitude,
@@ -16,6 +19,17 @@ export const useGetCurrentWeatherForLocation = (location: Location) => {
       return response.data;
     },
     enabled: !!location,
-    staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useGetCurrentWeatherForCityName = (city: string) => {
+  return useQuery({
+    queryKey: openWeatherKeys.itemCity(city),
+    queryFn: async (): Promise<GetWeatherForLocationResponse> => {
+      const response = await getCurrentWeatherForCity(city);
+
+      return response.data;
+    },
+    enabled: !!city,
   });
 };

@@ -2,5 +2,6 @@ import Location from "./Location";
 
 export const openWeatherKeys = {
   all: () => ["openWeather"],
-  item: (location: Location) => [...openWeatherKeys.all(), location],
+  itemLocation: (location: Location) => [...openWeatherKeys.all(), location],
+  itemCity: (city: string) => [...openWeatherKeys.all(), city],
 };
