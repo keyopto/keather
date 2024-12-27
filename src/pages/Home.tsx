@@ -1,52 +1,16 @@
-import { useEffect, useState } from "react";
-import useGeolocation from "../hooks/useGeolocation";
-import Location from "../types/Location";
-import {
-  useGetCurrentWeatherForCityName,
-  useGetCurrentWeatherForLocation,
-} from "../hooks/WeatherReportApi";
 import WeatherCard from "../components/WeatherCard";
-import GetWeatherForLocationResponse from "../types/GetWeatherForLocationResponse";
 import styled from "styled-components";
 import SearchBar from "../components/SearchBar";
+import useGetHomeData from "../hooks/useGetHomeData";
 
 const Home = () => {
-  const { locationInfo } = useGeolocation();
+  const { thisLocationWeather, otherLocationsWeathers, addLocation } =
+    useGetHomeData();
 
-  const [thisLocation, setThisLocation] = useState<Location>();
-
-  const [searchedCity, setSearchedCity] = useState<string>();
-
-  const { data: thisLocationWeather, isLoading: isLoadingThisLocationWeather } =
-    useGetCurrentWeatherForLocation(thisLocation as Location);
-
-  const { data: searchedCityWeather } = useGetCurrentWeatherForCityName(
-    searchedCity as string,
-  );
-
-  useEffect(() => {
-    if (!locationInfo) {
-      return;
-    }
-
-    setThisLocation({
-      longitude: locationInfo?.longitude,
-      latitude: locationInfo?.latitude,
-    });
-  }, [locationInfo]);
-
-  const getWeatherCard = (
-    weather: GetWeatherForLocationResponse | undefined,
-  ) => {
-    if (weather === undefined) {
-      return null;
-    }
-
-    return <WeatherCard weather={weather} />;
-  };
+  console.log(otherLocationsWeathers);
 
   const onSearch = (searchText: string) => {
-    setSearchedCity(searchText);
+    addLocation(searchText);
   };
 
   return (
@@ -55,10 +19,10 @@ const Home = () => {
         <Title>Connaître votre météo !</Title>
       </Header>
       <SearchBar onValidate={onSearch} />
-      {isLoadingThisLocationWeather || !thisLocationWeather
-        ? null
-        : getWeatherCard(thisLocationWeather)}
-      {!searchedCityWeather ? null : getWeatherCard(searchedCityWeather)}
+      <WeatherCard weatherResult={thisLocationWeather} />
+      {otherLocationsWeathers.map((weatherResult) => (
+        <WeatherCard weatherResult={weatherResult} />
+      ))}
     </Container>
   );
 };

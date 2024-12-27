@@ -16,6 +16,7 @@ const SearchBar: React.FC<{
         return;
       }
       onValidate(searchText);
+      setSearchText("");
     }
   };
 

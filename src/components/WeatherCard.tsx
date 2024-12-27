@@ -1,10 +1,17 @@
 import React from "react";
 import GetWeatherForLocationResponse from "../types/GetWeatherForLocationResponse";
 import styled from "styled-components";
+import { UseQueryResult } from "@tanstack/react-query";
 
 const WeatherCard: React.FC<{
-  weather: GetWeatherForLocationResponse;
-}> = ({ weather }) => {
+  weatherResult: UseQueryResult<GetWeatherForLocationResponse, Error>;
+}> = ({ weatherResult }) => {
+  const weather = weatherResult.data;
+
+  if (!weather) {
+    return null;
+  }
+
   return (
     <Container>
       <Header>
