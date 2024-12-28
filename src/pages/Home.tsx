@@ -2,12 +2,14 @@ import WeatherCard from "../components/WeatherCard";
 import styled from "styled-components";
 import SearchBar from "../components/SearchBar";
 import useGetHomeData from "../hooks/useGetHomeData";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "../components/LanguageSelector";
 
 const Home = () => {
+  const { t } = useTranslation();
+
   const { thisLocationWeather, otherLocationsWeathers, addLocation } =
     useGetHomeData();
-
-  console.log(otherLocationsWeathers);
 
   const onSearch = (searchText: string) => {
     addLocation(searchText);
@@ -16,8 +18,9 @@ const Home = () => {
   return (
     <Container>
       <Header>
-        <Title>Connaître votre météo !</Title>
+        <Title>{t("welcome_home")}</Title>
       </Header>
+      <LanguageSelector />
       <SearchBar onValidate={onSearch} />
       <WeatherCard weatherResult={thisLocationWeather} />
       {otherLocationsWeathers.map((weatherResult) => (
