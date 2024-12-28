@@ -1,9 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const SearchBar: React.FC<{
   onValidate: (search: string) => void;
 }> = ({ onValidate }) => {
+  const { t } = useTranslation();
+
   const [searchText, setSearchText] = useState<string>("");
 
   const handleChangeText = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +26,7 @@ const SearchBar: React.FC<{
   return (
     <Container>
       <SearchInput
-        placeholder="Type the city name"
+        placeholder={t("search_city_placeholder")}
         type="text"
         value={searchText}
         onChange={handleChangeText}

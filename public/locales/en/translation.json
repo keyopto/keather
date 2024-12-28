@@ -1,3 +1,4 @@
 {
-  "welcome_home" : "Let's get your weather report !"
+  "welcome_home" : "Let's get your weather report !",
+  "search_city_placeholder" : "Type the city name"
 }
