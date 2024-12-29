@@ -27,12 +27,24 @@ const Home = () => {
       <Header>
         <Title>{t("welcome_home")}</Title>
       </Header>
-      <SubTitle> {t("your_location")}</SubTitle>
-      <WeatherCard weatherResult={thisLocationWeather} />
-      <SearchBar onValidate={onSearch} />
-      {otherLocationsWeathers.map((weatherResult) => (
-        <WeatherCard weatherResult={weatherResult} onClose={onRemoveLocation} />
-      ))}
+      <Block>
+        <SubTitle> {t("your_location")}</SubTitle>
+        <WeatherCard weatherResult={thisLocationWeather} />
+      </Block>
+      <Block>
+        <SubTitle> {t("other_locations")}</SubTitle>
+        <SearchBar onValidate={onSearch} />
+        <FavoritesLocationsContainer>
+          {otherLocationsWeathers.map((weatherResult) => (
+            <WeatherCardContainer>
+              <WeatherCard
+                weatherResult={weatherResult}
+                onClose={onRemoveLocation}
+              />
+            </WeatherCardContainer>
+          ))}
+        </FavoritesLocationsContainer>
+      </Block>
     </Container>
   );
 };
@@ -56,5 +68,24 @@ const Title = styled.h1`
 const SubTitle = styled.h2`
   font-weight: bold;
   font-size: 25px;
-  padding: 10px 25px;
+  text-align: center;
+`;
+
+const WeatherCardContainer = styled.div`
+  width: 31.3%;
+`;
+
+const FavoritesLocationsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3%;
+  row-gap: 30px;
+`;
+
+const Block = styled.div`
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;

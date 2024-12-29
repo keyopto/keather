@@ -38,6 +38,15 @@ const SearchBar: React.FC<{
 
 export default SearchBar;
 
-const Container = styled.div``;
+const Container = styled.div`
+  border-radius: 10px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+`;
 
-const SearchInput = styled.input``;
+const SearchInput = styled.input`
+  border: 0px;
+  width: 100%;
+  font-size: 20px;
+  background-color: transparent;
+`;

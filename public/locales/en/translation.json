@@ -2,5 +2,6 @@
   "welcome_home" : "Let's get your weather report !",
   "search_city_placeholder" : "Type the city name",
   "your_location" : "Your location",
-  "feels_like": "Feels like"
+  "feels_like": "Feels like",
+  "other_locations": "Other locations"
 }
