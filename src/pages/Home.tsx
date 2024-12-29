@@ -8,11 +8,19 @@ import LanguageSelector from "../components/LanguageSelector";
 const Home = () => {
   const { t } = useTranslation();
 
-  const { thisLocationWeather, otherLocationsWeathers, addLocation } =
-    useGetHomeData();
+  const {
+    thisLocationWeather,
+    otherLocationsWeathers,
+    addLocation,
+    removeLocation,
+  } = useGetHomeData();
 
   const onSearch = (searchText: string) => {
     addLocation(searchText);
+  };
+
+  const onRemoveLocation = (city: string) => {
+    removeLocation(city);
   };
 
   return (
@@ -24,7 +32,7 @@ const Home = () => {
       <SearchBar onValidate={onSearch} />
       <WeatherCard weatherResult={thisLocationWeather} />
       {otherLocationsWeathers.map((weatherResult) => (
-        <WeatherCard weatherResult={weatherResult} />
+        <WeatherCard weatherResult={weatherResult} onClose={onRemoveLocation} />
       ))}
     </Container>
   );

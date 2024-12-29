@@ -13,7 +13,7 @@ const useGetHomeData = (): GetHomeDataReturn => {
 
   const [thisLocation, setThisLocation] = useState<Location>();
 
-  const { favorites, addFavorite } = useFavoritesCities();
+  const { favorites, addFavorite, removeFavorite } = useFavoritesCities();
 
   const thisLocationWeather = useGetCurrentWeatherForLocation(
     thisLocation as Location,
@@ -36,6 +36,7 @@ const useGetHomeData = (): GetHomeDataReturn => {
     thisLocationWeather,
     otherLocationsWeathers,
     addLocation: addFavorite,
+    removeLocation: removeFavorite,
   };
 };
 

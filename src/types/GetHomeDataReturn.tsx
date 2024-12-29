@@ -8,6 +8,7 @@ interface GetHomeDataReturn {
     Error
   >[];
   addLocation: (city: string) => void;
+  removeLocation: (city: string) => void;
 }
 
 export default GetHomeDataReturn;

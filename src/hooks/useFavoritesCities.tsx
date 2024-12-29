@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { KEY_FAVORITES_CITIES_LOCAL_STORAGE } from "../constants/constants";
 
 const FavoritesCitiesContext = createContext({
   favorites: [],
@@ -15,8 +16,6 @@ const FavoritesCitiesContext = createContext({
   addFavorite: (city: string) => void;
   removeFavorite: (city: string) => void;
 });
-
-const KEY_FAVORITES_CITIES_LOCAL_STORAGE = "favorites_cities";
 
 export const FavoritesCitiesProvider = ({
   children,
@@ -50,8 +49,9 @@ export const FavoritesCitiesProvider = ({
   const removeFavorite = (newItem: string) => {
     setFavorites((prev) => {
       const index = prev.indexOf(newItem);
+      prev.splice(index, 1);
 
-      return [...prev.splice(index, 1)];
+      return [...prev];
     });
   };
 

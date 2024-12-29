@@ -5,17 +5,28 @@ import { UseQueryResult } from "@tanstack/react-query";
 
 const WeatherCard: React.FC<{
   weatherResult: UseQueryResult<GetWeatherForLocationResponse, Error>;
-}> = ({ weatherResult }) => {
+  onClose?: (city: string) => void;
+}> = ({ weatherResult, onClose = null }) => {
   const weather = weatherResult.data;
 
   if (!weather) {
     return null;
   }
 
+  const getCloseButton = () => {
+    if (!onClose) {
+      return;
+    }
+    return (
+      <Close src="images/close.png" onClick={() => onClose(weather.name)} />
+    );
+  };
+
   return (
     <Container>
       <Header>
         <Title>{weather.name}</Title>
+        {getCloseButton()}
       </Header>
       <div>
         <h3> {weather.weather[0].main} </h3>
@@ -40,4 +51,10 @@ const Header = styled.div`
 const Title = styled.h2`
   padding: 0px;
   margin: 0px;
+`;
+
+const Close = styled.img`
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
 `;
