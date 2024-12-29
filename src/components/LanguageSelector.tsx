@@ -9,6 +9,7 @@ const LanguageSelector: React.FC<{}> = () => {
   const { i18n } = useTranslation();
 
   const onClickItemSelector = (newLanguage: string) => {
+    setIsSelectorVisible(false);
     i18n.changeLanguage(newLanguage);
   };
 
@@ -18,17 +19,19 @@ const LanguageSelector: React.FC<{}> = () => {
     }
 
     return (
-      <Selector>
-        {AvailableLanguages.map((language) => {
-          return (
-            <ItemSelector
-              onClick={() => onClickItemSelector(language.definition)}
-            >
-              {language.name}
-            </ItemSelector>
-          );
-        })}
-      </Selector>
+      <SelectorContainer>
+        <Selector>
+          {AvailableLanguages.map((language) => {
+            return (
+              <ItemSelector
+                onClick={() => onClickItemSelector(language.definition)}
+              >
+                {language.name}
+              </ItemSelector>
+            );
+          })}
+        </Selector>
+      </SelectorContainer>
     );
   };
 
@@ -56,11 +59,21 @@ const Flag = styled.img`
   height: 25px;
 `;
 
-const Selector = styled.div``;
+const SelectorContainer = styled.div`
+  position: relative;
+`;
+
+const Selector = styled.div`
+  position: absolute;
+  background-color: white;
+  top: 0px;
+  right: 0px;
+`;
 
 const ItemSelector = styled.div`
   cursor: pointer;
   &:hover {
     background-color: gray;
   }
+  padding: 10px 20px;
 `;

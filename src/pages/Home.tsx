@@ -3,7 +3,6 @@ import styled from "styled-components";
 import SearchBar from "../components/SearchBar";
 import useGetHomeData from "../hooks/useGetHomeData";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "../components/LanguageSelector";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -28,7 +27,6 @@ const Home = () => {
       <Header>
         <Title>{t("welcome_home")}</Title>
       </Header>
-      <LanguageSelector />
       <SearchBar onValidate={onSearch} />
       <WeatherCard weatherResult={thisLocationWeather} />
       {otherLocationsWeathers.map((weatherResult) => (
