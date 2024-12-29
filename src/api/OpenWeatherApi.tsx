@@ -14,6 +14,7 @@ export const getCurrentWeatherForLocation = (
     params: {
       ...params,
       appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+      units: "metric",
     },
   });
 };
@@ -23,6 +24,7 @@ export const getCurrentWeatherForCity = (params: GetWeatherForCityRequest) => {
     params: {
       ...params,
       appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+      units: "metric",
     },
   });
 };

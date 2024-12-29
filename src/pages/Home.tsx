@@ -27,8 +27,9 @@ const Home = () => {
       <Header>
         <Title>{t("welcome_home")}</Title>
       </Header>
-      <SearchBar onValidate={onSearch} />
+      <SubTitle> {t("your_location")}</SubTitle>
       <WeatherCard weatherResult={thisLocationWeather} />
+      <SearchBar onValidate={onSearch} />
       {otherLocationsWeathers.map((weatherResult) => (
         <WeatherCard weatherResult={weatherResult} onClose={onRemoveLocation} />
       ))}
@@ -50,4 +51,10 @@ const Header = styled.div`
 const Title = styled.h1`
   color: #588694;
   font-size: 50px;
+`;
+
+const SubTitle = styled.h2`
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px 25px;
 `;

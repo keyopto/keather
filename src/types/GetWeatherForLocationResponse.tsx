@@ -6,6 +6,10 @@ interface GetWeatherForLocationResponse {
     main: string;
     description: string;
   }[];
+  main: {
+    temp: number;
+    feels_like: number;
+  };
 }
 
 export default GetWeatherForLocationResponse;

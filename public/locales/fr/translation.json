@@ -1,4 +1,5 @@
 {
   "welcome_home" : "Connaître votre météo !",
-  "search_city_placeholder" : "Entrez le nom de la ville"
+  "search_city_placeholder" : "Entrez le nom de la ville",
+  "your_location" : "Votre localisation"
 }
