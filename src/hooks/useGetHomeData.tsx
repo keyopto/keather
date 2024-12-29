@@ -6,19 +6,20 @@ import {
   useGetCurrentWeatherForLocation,
 } from "./WeatherReportApi";
 import GetHomeDataReturn from "../types/GetHomeDataReturn";
+import { useFavoritesCities } from "./useFavoritesCities";
 
 const useGetHomeData = (): GetHomeDataReturn => {
   const { locationInfo } = useGeolocation();
 
   const [thisLocation, setThisLocation] = useState<Location>();
 
-  const [otherCities, setOtherCities] = useState<string[]>([]);
+  const { favorites, addFavorite } = useFavoritesCities();
 
   const thisLocationWeather = useGetCurrentWeatherForLocation(
     thisLocation as Location,
   );
 
-  const otherLocationsWeathers = useGetCurrentWeathersForCities(otherCities);
+  const otherLocationsWeathers = useGetCurrentWeathersForCities(favorites);
 
   useEffect(() => {
     if (!locationInfo) {
@@ -31,20 +32,10 @@ const useGetHomeData = (): GetHomeDataReturn => {
     });
   }, [locationInfo]);
 
-  const addLocation = (city: string) => {
-    if (!!otherCities.find((otherCity) => otherCity === city)) {
-      return;
-    }
-
-    setOtherCities((prev) => {
-      return [...prev, city];
-    });
-  };
-
   return {
     thisLocationWeather,
     otherLocationsWeathers,
-    addLocation,
+    addLocation: addFavorite,
   };
 };
 
